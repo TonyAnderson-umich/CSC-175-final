@@ -37,11 +37,11 @@ int main() {
 
     cout << endl << endl;
     //first choice time!
-    cout << "It's late, and the cold air of the nighttime woods is biting at your skin. You know you'd ought to build a fire" << endl;
+    cout << "//scenario 1 - how to build a fire" << endl;
 
 
     while (currentChoice != 1 && currentChoice != 2) {
-        cout << "Do you:" << endl << "1) Carelessly toss some wood together and throw a lit match at it?" << endl << "2) Carefully construct a pyre for your fire?" << endl;
+        cout << "Do you:" << endl << "1) //bad choice" << endl << "2) //good choice" << endl;
         cout << "(1 or 2) ";
         cin >> currentChoice;
         if (currentChoice == 1) {
