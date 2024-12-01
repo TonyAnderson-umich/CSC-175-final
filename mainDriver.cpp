@@ -36,7 +36,7 @@ int main() {
     }
 
     cout << endl << endl;
-    //first choice time!
+    //first scenario
     cout << "//scenario 1 - how to build a fire" << endl;
 
 
@@ -56,7 +56,75 @@ int main() {
     }
     //reset current choice
     currentChoice = 0;
+    cout << endl << endl;
 
+    cout << "//scenario 2 - whosamawhatsit" << endl;
+
+    while (currentChoice != 1 && currentChoice != 2) {
+        cout << "Do you:" << endl << "1) //good choice" << endl << "2) //bad choice" << endl;
+        cout << "(1 or 2) ";
+        cin >> currentChoice;
+        if (currentChoice == 1) {
+            //choice 2 good option
+            choicesMade[1][0] = true;
+        } else if (currentChoice == 2) {
+            //choice 2 bad option
+            choicesMade[1][1] = true;
+        } else {
+            cout << "You and I both know that you know how to play. Let's run it back and try again\n";
+        }
+    }
+    //reset current choice
+    currentChoice = 0;
+
+    cout << endl << endl;
+
+    cout << "//scenario 3 - whatchamacallit" << endl;
+
+    while (currentChoice != 1 && currentChoice != 2) {
+        cout << "Do you:" << endl << "1) //good choice" << endl << "2) //bad choice" << endl;
+        cout << "(1 or 2) ";
+        cin >> currentChoice;
+        if (currentChoice == 1) {
+            //choice 3 good option
+            choicesMade[2][0] = true;
+        } else if (currentChoice == 2) {
+            //choice 3 bad option
+            choicesMade[2][1] = true;
+        } else {
+            cout << "You and I both know that you know how to play. Let's run it back and try again\n";
+        }
+    }
+    //reset current choice
+    currentChoice = 0;
+
+    cout << endl << endl;
+
+    cout << "//scenario 4 - howsamadosit" << endl;
+
+    while (currentChoice != 1 && currentChoice != 2) {
+        cout << "Do you:" << endl << "1) //bad choice" << endl << "2) //good choice" << endl;
+        cout << "(1 or 2) ";
+        cin >> currentChoice;
+        if (currentChoice == 1) {
+            //choice 4 bad option
+            choicesMade[3][1] = true;
+        } else if (currentChoice == 2) {
+            //choice 4 good option
+            choicesMade[3][0] = true;
+        } else {
+            cout << "You and I both know that you know how to play. Let's run it back and try again\n";
+        }
+    }
+    //reset current choice
+    currentChoice = 0;
+
+    //at the end of the game, depending on choices (checked by the choice matrix)
+    //we can do a series of if statements (preferably put neatly into a function)
+    //if we want more branching pathways earlier on, we need to know exact story
+    //and atm, I can't look at the google doc. I will later though and adjust from there
+    //PLEASE COMMENT YOUR CODE WHEN POSSIBLE
+    //and make note of your changes when pushing to git. Also, sign your comments -TA
 
     return (0);
 }
