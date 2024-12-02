@@ -1,4 +1,7 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include "./functions.cpp"
 using namespace std;
 
 int main() {
@@ -9,6 +12,8 @@ int main() {
     //think of it as the first box being the choice number, and the second box being if the decision was good(0) or bad(1) -TA
     int currentChoice = 0;
     bool fireBig = false;
+    srand(time(0));
+
 
     //beginning game, welcoming player, taking name
     cout << "Welcome to the game!" << endl << "To begin, please name your character" << endl;
@@ -64,6 +69,7 @@ int main() {
 
     cout << "You seem tired " << playerName << ", do you want to put out the fire?" << endl;
 
+/*
     while (currentChoice != 1 && currentChoice != 2) {
         cout << "Do you:" << endl << "1) try and put it out? Or do you: " << endl << "2) just leave it as it is?" << endl;
         cout << "(1 or 2) ";
@@ -94,12 +100,63 @@ int main() {
             cout << "You and I both know that you know how to play. Let's run it back and try again\n";
         }
     }
+*/
+
+//I commented out the original fire extinguishing scenario and replaced it with the simpler fire extinguishing scenario that we discussed.
+//The original scenario is still here if we decide to return to it.
+//The new scenario removes the choice to try extinguishing the fire a second time and replaces it with three choices:
+//1) Putting the fire out completely. 2) Dimming the fire a bit. 3) Leaving it as it is.
+//If the player made a good choice previously and created a nice fire, then option 1 would game over, option 2 would make a small fire,
+//and option 3 would make a big fire.
+//If the player made a bad choice previously and created a crappy fire, then the player's efforts would be unsuccessful, and
+//option 3 would override, making a big fire.
+//Following the proper procedures to making a fire is important, or else fires will be difficult to control.
+//If you don't like the override idea, then you're welcome to change it. Don't worry, you won't hurt my feelings. ;)
+//Also, Toby, don't forget to look into making the wolf attack survival scenario. - AH
+
+    while (currentChoice != 1 && currentChoice != 2 && currentChoice != 3) {
+        cout << "Do you:" << endl << "1) try and put it out? Or do you: " << endl << "2) dim the fire a bit? Or do you: " << endl << "3) just leave it as it is?" << endl;
+        cout << "(1 or 2 or 3) ";
+        cin >> currentChoice;
+        if (choicesMade[0][1] == true) {
+            //If you made a crappy fire, then you aren't able to extinguish it.
+            //You can change the dialogue if you want.
+            if (currentChoice == 1) {
+                cout << "You were unable to put out your flaming mess of a fire!" << endl;
+            } else if (currentChoice == 2) {
+                cout << "You were unable to dim your flaming mess of a fire!" << endl;
+            } else {
+                //I'm not sure if this else statement needs to be here or not.
+            }
+            cout << "The fire is still blazing, hot as before. Whelp, off to bed.";
+            fireBig = true;
+        } else if (currentChoice == 1) {
+            choicesMade[1][1] = true;
+            //choice 2 bad option
+            cout << "Cool! It's completely out! Kind of defeats the point of this game though...";
+            cout << "Game over!";
+            return 0;
+        } else if (currentChoice == 2) {
+            choicesMade[1][0] = true;
+            //choice 2 good option and small fire
+            cout << "Hmmm, there's still some embers burning. Whelp, off to bed anyways.";
+            fireBig = false;
+        } else if (currentChoice == 3) {
+            choicesMade[1][0] = true;
+            //choice 2 good option and big fire
+            cout << "The fire is still blazing, hot as before. Whelp, off to bed.";
+            fireBig = true;
+        }
+        else {
+            cout << "You and I both know that you know how to play. Let's run it back and try again\n";
+        }
+    }
     //reset current choice
     currentChoice = 0;
 
     cout << endl << endl;
 
-    cout << "Okay, it's the middle of the night, " << playerName << " and I think I hear something? Maybe see some weird lights outside our tent?" << endl;
+    cout << "Okay, it's the middle of the night, " << playerName << ", and I think I hear something? Maybe see some weird lights outside our tent?" << endl;
 
     while (currentChoice != 1 && currentChoice != 2) {
         cout << "Do you:" << endl << "1) investigate? Or do you: " << endl << "2) just go back to sleep?" << endl;
@@ -109,21 +166,39 @@ int main() {
             choicesMade[2][0] = true;
             //choice 3 good option
             // 3.1 - small fire, higher chance of escape
-            if (!fireBig) {
-                //randomize me cap'n
+            //the chance of survival if they have a small fire is 80%
+            //make the percentage whatever you want - AH
+            if (fireBig == false) {
+                if ((rand() % 100 + 1) > 20) {
+                    //the player lives
+                }
+                else {
+                    //the player dies
+                    cout << "Oh no! That was a fire, " << playerName << "! A BIG FIRE!";
+                    cout << "Game over!";
+                    return 0;
+                }
             }
-        } else if (currentChoice == 1) {
-            choicesMade[2][0] = true;
-            //choice 3 good option
             // 3.2 - big fire, lower chance of escape
-            if (fireBig) {
-                //randomize me smaller cap'n
+            //the chance of survival if they have a big fire is 50%
+            //make the percentage whatever you want - AH
+            if (fireBig == true) {
+                if ((rand() % 100 + 1) > 50) {
+                    //the player lives
+                }
+                else {
+                    //the player dies
+                    cout << "Oh no! That was a fire, " << playerName << "! A BIG FIRE!";
+                    cout << "Game over!";
+                    return 0;
+                }
             }
         } else if (currentChoice == 2) {
             choicesMade[2][1] = true;
             //choice 3 bad option
             cout << "Oh no! That was a fire, " << playerName << "! A BIG FIRE!";
-                cout << "Game over!";
+            cout << "Game over!";
+            return 0;
         } else {
             cout << "You and I both know that you know how to play. Let's run it back and try again\n";
         }
