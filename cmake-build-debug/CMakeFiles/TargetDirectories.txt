@@ -1,0 +1,3 @@
+C:/Users/tonya/CLionProjects/CSC-175-final/cmake-build-debug/CMakeFiles/CSC_175_final.dir
+C:/Users/tonya/CLionProjects/CSC-175-final/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/tonya/CLionProjects/CSC-175-final/cmake-build-debug/CMakeFiles/rebuild_cache.dir
