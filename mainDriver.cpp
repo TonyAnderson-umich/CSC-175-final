@@ -5,9 +5,10 @@ int main() {
 
     string playerName;
     string yesOrNo;
-    bool choicesMade[4][2] = {false, false, false, false, false, false, false, false}; //setting up choice matrix
+    bool choicesMade[6][2] = {false, false, false, false, false, false, false, false, false, false, false, false}; //setting up choice matrix
     //think of it as the first box being the choice number, and the second box being if the decision was good(0) or bad(1) -TA
     int currentChoice = 0;
+    bool fireBig = false;
 
     //beginning game, welcoming player, taking name
     cout << "Welcome to the game!" << endl << "To begin, please name your character" << endl;
@@ -38,7 +39,7 @@ int main() {
     cout << endl << endl;
     //first scenario
     cout << "It is a wonderful fall evening in the Lincoln National Park, and you are going to camp for the night! It's getting cold, and you decide to build a fire." << endl;
-    cout << "You have some firewood and firestarters. Okay, " << playername << ", << endl;
+    cout << "You have some firewood and fire starters. Okay, " << playerName << "," << endl;
 
 
     while (currentChoice != 1 && currentChoice != 2) {
@@ -46,13 +47,13 @@ int main() {
         cout << "(1 or 2) ";
         cin >> currentChoice;
         if (currentChoice == 1) {
-            //choice 1 bad option
-            cout << "Wow, it's a...giant flaming mess..."
             choicesMade[0][1] = true;
+            //choice 1 bad option
+            cout << "Wow, it's a...giant flaming mess...";
         } else if (currentChoice == 2) {
-            //choice 1 good action
-            cout << "Wow! That looks great!"
             choicesMade[0][0] = true;
+            //choice 1 good action
+            cout << "Wow! That looks great!";
         } else {
             cout << "Wow, we got a funny guy here. Let's run it back and try again\n";
         }
@@ -61,23 +62,34 @@ int main() {
     currentChoice = 0;
     cout << endl << endl;
 
-    cout << "You seem tired " << playername << ", do you want to put out the fire?" << endl;
+    cout << "You seem tired " << playerName << ", do you want to put out the fire?" << endl;
 
     while (currentChoice != 1 && currentChoice != 2) {
         cout << "Do you:" << endl << "1) try and put it out? Or do you: " << endl << "2) just leave it as it is?" << endl;
         cout << "(1 or 2) ";
         cin >> currentChoice;
         if (currentChoice == 1) {
-            //choice 2 good option
-            // if good1 AND good2 = true
-            cout << "Cool! It's completely out! Kind of defeats the point of this game though..."
-                cout << "Game over!"
             choicesMade[1][0] = true;
+            //choice 2 good option
+            if (choicesMade[0][0] == true) {
+                cout << "Cool! It's completely out! Kind of defeats the point of this game though...";
+                cout << "Game over!";
+                return 0;
+            } else {
+                cout << "Hmmm, there's still some embers burning. Whelp, off to bed anyways.";
+                fireBig = false;
+            }
         } else if (currentChoice == 2) {
+            choicesMade[1][1] = true;
             //choice 2 bad option
             // if good1 AND bad2 OR bad1 AND good2
-            cout << "Hmmm, there's still some embers burning. Try again?" // need code to try again. If try again good=true then scenario 3.1, if bad=true (or bad1 AND bad2=true) then scenario 3.2
-            choicesMade[1][1] = true;
+            if (choicesMade[0][0] == true) {
+                cout << "The fire is still going. Whelp, off to bed."; // need code to try again. If try again good=true then scenario 3.1, if bad=true (or bad1 AND bad2=true) then scenario 3.2
+                fireBig = true;
+            } else {
+                cout << "The fire is still blazing, hot as before. Off to bed.";
+                fireBig = true;
+            }
         } else {
             cout << "You and I both know that you know how to play. Let's run it back and try again\n";
         }
@@ -87,27 +99,31 @@ int main() {
 
     cout << endl << endl;
 
-    cout << "Okay, it's the middle of the night, " << playername << " and I think I hear something? Maybe see some weird lights outside our tent?" << endl;
+    cout << "Okay, it's the middle of the night, " << playerName << " and I think I hear something? Maybe see some weird lights outside our tent?" << endl;
 
     while (currentChoice != 1 && currentChoice != 2) {
         cout << "Do you:" << endl << "1) investigate? Or do you: " << endl << "2) just go back to sleep?" << endl;
         cout << "(1 or 2) ";
         cin >> currentChoice;
         if (currentChoice == 1) {
+            choicesMade[2][0] = true;
             //choice 3 good option
             // 3.1 - small fire, higher chance of escape
-            
-            choicesMade[2][0] = true;
+            if (!fireBig) {
+                //randomize me cap'n
+            }
         } else if (currentChoice == 1) {
-            //choice 3 good option
-            // 3.2 - small fire, lower chance of escape
-    
             choicesMade[2][0] = true;
+            //choice 3 good option
+            // 3.2 - big fire, lower chance of escape
+            if (fireBig) {
+                //randomize me smaller cap'n
+            }
         } else if (currentChoice == 2) {
-            //choice 3 bad option
-            cout << "Oh no! That was a fire, " << playername << "! A BIG FIRE!"
-                cout << "Game over!"
             choicesMade[2][1] = true;
+            //choice 3 bad option
+            cout << "Oh no! That was a fire, " << playerName << "! A BIG FIRE!";
+                cout << "Game over!";
         } else {
             cout << "You and I both know that you know how to play. Let's run it back and try again\n";
         }
@@ -117,7 +133,7 @@ int main() {
 
     cout << endl << endl;
 
-    cout << "OH NO! THE FOREST IS ON FIRE, " << playernameCAPS << "! Wait! I think I heard someone yelling! Over there!" << endl;
+    cout << "OH NO! THE FOREST IS ON FIRE, " << playerName << "! Wait! I think I heard someone yelling! Over there!" << endl;
 
 // if small fire, can travel to the voice to rescue or choose to ignore
 // if big fire, have no choice, have to ignore
@@ -129,13 +145,13 @@ int main() {
         cin >> currentChoice;
         if (currentChoice == 1) {
             //choice 4 bad option
-            cout << "Aw man, are you sure?"
+            cout << "Aw man, are you sure?";
                 //repeat, if still no then "Okay, if you're sure..."
                 // if yes then "Okay! Let's go!"
             choicesMade[3][1] = true;
         } else if (currentChoice == 2) {
             //choice 4 good option
-            cout << "Okay! Let's go!"
+            cout << "Okay! Let's go!";
             choicesMade[3][0] = true;
         } else {
             cout << "You and I both know that you know how to play. Let's run it back and try again\n";
@@ -148,14 +164,14 @@ int main() {
     // need setup for two more scenarios, going to find the voice and just running away. Three seperate paths, left/right/center. Set it so correct sequence
     // to leave is randomized. If running away, do three times. If finding voice, only choose twice. If found voice then only one choice to get out (always
     // correct, no matter the choice). If no found voice then two to get back, higher chance of correct choices getting out (as opposed to not going)
-    - TZ
+    //- TZ
 
     // yippee! ending scenario!! - TZ
 
     //at the end of the game, depending on choices (checked by the choice matrix)
     //we can do a series of if statements (preferably put neatly into a function)
     //if we want more branching pathways earlier on, we need to know exact story
-    //and atm, I can't look at the google doc. I will later though and adjust from there
+    //and atm, I can't look at the Google doc. I will later though and adjust from there
     //PLEASE COMMENT YOUR CODE WHEN POSSIBLE
     //and make note of your changes when pushing to git. Also, sign your comments -TA
 
