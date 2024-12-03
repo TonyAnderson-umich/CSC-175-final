@@ -16,7 +16,7 @@ int main() {
     string chosenDirection = "bleh";
     srand(time(0));
 
-
+    startGame();
     //beginning game, welcoming player, taking name
     cout << "Welcome to the game!" << endl << "To begin, please name your character" << endl;
     cout << "My name is: ";
@@ -137,8 +137,8 @@ int main() {
         } else if (currentChoice == 1) {
             choicesMade[1][1] = true;
             //choice 2 bad option
-            cout << "Cool! It's completely out! Kind of defeats the point of this game though...";
-            cout << "Game over!";
+            cout << "Cool! It's completely out! Kind of defeats the point of this game though...\n";
+            gameOver();
             return 0;
         } else if (currentChoice == 2) {
             choicesMade[1][0] = true;
@@ -178,8 +178,8 @@ int main() {
                 }
                 else {
                     //the player dies
-                    cout << "Oh no! That was a fire, " << playerName << "! A BIG FIRE!";
-                    cout << "Game over!";
+                    cout << "Oh no! That was a fire, " << playerName << "! A BIG FIRE!\n";
+                    gameOver();
                     return 0;
                 }
             }
@@ -192,16 +192,16 @@ int main() {
                 }
                 else {
                     //the player dies
-                    cout << "Oh no! That was a fire, " << playerName << "! A BIG FIRE!";
-                    cout << "Game over!";
+                    cout << "Oh no! That was a fire, " << playerName << "! A BIG FIRE!\n";
+                    gameOver();
                     return 0;
                 }
             }
         } else if (currentChoice == 2) {
             choicesMade[2][1] = true;
             //choice 3 bad option
-            cout << "Oh no! That was a fire, " << playerName << "! A BIG FIRE!";
-            cout << "Game over!";
+            cout << "Oh no! That was a fire, " << playerName << "! A BIG FIRE!\n";
+            gameOver();
             return 0;
         } else {
             cout << "You and I both know that you know how to play. Let's run it back and try again\n";
@@ -247,13 +247,13 @@ int main() {
     cout << "There's a split in the road here! Both paths look equally trodden, but I have a feeling that choosing the wrong path will lead to our doom";
     cout << endl << "Do we go: " << endl << "1) left, or" << endl << "2) right?";
 
-    if (choicesMade[2][0]) {
+    if (choicesMade[3][0]) {
         if ((rand() % 100 + 1) > 25) {
             goodDirection = true;
         } else {
             goodDirection = false;
         }
-    } else if (choicesMade[2][1]) {
+    } else if (choicesMade[3][1]) {
         if ((rand() % 100 + 1) > 50) {
             goodDirection = true;
         } else {
@@ -272,10 +272,15 @@ int main() {
         }
     }
     if (goodDirection) {
-        cout << "It looks like the " << chosenDirection << " path was the correct choice here. Thank goodness!";
+        cout << "It looks like the " << chosenDirection << " path was the correct choice here. Thank goodness!\n";
+    }
+    else {
+        cout << "Oh no, it looks like that wasn't the correct direction!" << endl << "You burned to death in the fire!" << endl;
+        gameOver();
+        return 0;
     }
 
-
+    endGame();
 
     currentChoice = 0;
 
