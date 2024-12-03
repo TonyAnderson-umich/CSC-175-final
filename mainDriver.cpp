@@ -12,6 +12,8 @@ int main() {
     //think of it as the first box being the choice number, and the second box being if the decision was good(0) or bad(1) -TA
     int currentChoice = 0;
     bool fireBig = false;
+    bool goodDirection = false;
+    string chosenDirection = "bleh";
     srand(time(0));
 
 
@@ -47,6 +49,7 @@ int main() {
     cout << "You have some firewood and fire starters. Okay, " << playerName << "," << endl;
 
 
+    //choice 1
     while (currentChoice != 1 && currentChoice != 2) {
         cout << "Do you:" << endl << "1) haphazardly throw it together and slap some lighter fluid on it? Or do you:" << endl << "2) build it very carefully and properly?" << endl;
         cout << "(1 or 2) ";
@@ -114,6 +117,7 @@ int main() {
 //If you don't like the override idea, then you're welcome to change it. Don't worry, you won't hurt my feelings. ;)
 //Also, Toby, don't forget to look into making the wolf attack survival scenario. - AH
 
+    //choice 2
     while (currentChoice != 1 && currentChoice != 2 && currentChoice != 3) {
         cout << "Do you:" << endl << "1) try and put it out? Or do you: " << endl << "2) dim the fire a bit? Or do you: " << endl << "3) just leave it as it is?" << endl;
         cout << "(1 or 2 or 3) ";
@@ -126,7 +130,7 @@ int main() {
             } else if (currentChoice == 2) {
                 cout << "You were unable to dim your flaming mess of a fire!" << endl;
             } else {
-                //I'm not sure if this else statement needs to be here or not.
+                cout << "This hot mess of a fire is still... well, a hot mess. Nonetheless, sleep will find you soon enough";
             }
             cout << "The fire is still blazing, hot as before. Whelp, off to bed.";
             fireBig = true;
@@ -146,8 +150,7 @@ int main() {
             //choice 2 good option and big fire
             cout << "The fire is still blazing, hot as before. Whelp, off to bed.";
             fireBig = true;
-        }
-        else {
+        } else {
             cout << "You and I both know that you know how to play. Let's run it back and try again\n";
         }
     }
@@ -158,6 +161,7 @@ int main() {
 
     cout << "Okay, it's the middle of the night, " << playerName << ", and I think I hear something? Maybe see some weird lights outside our tent?" << endl;
 
+    //choice 3
     while (currentChoice != 1 && currentChoice != 2) {
         cout << "Do you:" << endl << "1) investigate? Or do you: " << endl << "2) just go back to sleep?" << endl;
         cout << "(1 or 2) ";
@@ -213,21 +217,24 @@ int main() {
 // if small fire, can travel to the voice to rescue or choose to ignore
 // if big fire, have no choice, have to ignore
     //assume the following code is for small fire
-    
+
+    //choice 4
     while (currentChoice != 1 && currentChoice != 2) {
-        cout << "Do we: " << endl << "1) run towards the voice! They may need help! Or do we: " << endl << "2) ignore it! We have to get  out of the forest fire!" << endl;
+        cout << "Do we: " << endl << "1) run towards the voice! They may need help! Or do we: " << endl << "2) ignore it! We have to get out of the forest fire!" << endl;
         cout << "(1 or 2) ";
         cin >> currentChoice;
         if (currentChoice == 1) {
             //choice 4 bad option
-            cout << "Aw man, are you sure?";
+            choicesMade[3][1] = true;
+            cout << "Aw man. Well, if you're sure...";
                 //repeat, if still no then "Okay, if you're sure..."
                 // if yes then "Okay! Let's go!"
-            choicesMade[3][1] = true;
+
         } else if (currentChoice == 2) {
+            choicesMade[3][0] = true;
             //choice 4 good option
             cout << "Okay! Let's go!";
-            choicesMade[3][0] = true;
+
         } else {
             cout << "You and I both know that you know how to play. Let's run it back and try again\n";
         }
@@ -235,7 +242,44 @@ int main() {
     //reset current choice
     currentChoice = 0;
 
+    //choice 5
+    cout << endl << endl;
+    cout << "There's a split in the road here! Both paths look equally trodden, but I have a feeling that choosing the wrong path will lead to our doom";
+    cout << endl << "Do we go: " << endl << "1) left, or" << endl << "2) right?";
 
+    if (choicesMade[2][0]) {
+        if ((rand() % 100 + 1) > 25) {
+            goodDirection = true;
+        } else {
+            goodDirection = false;
+        }
+    } else if (choicesMade[2][1]) {
+        if ((rand() % 100 + 1) > 50) {
+            goodDirection = true;
+        } else {
+            goodDirection = false;
+        }
+    }
+
+    while (currentChoice != 1 && currentChoice != 2) {
+        cin >> currentChoice;
+        if (currentChoice != 1 && currentChoice != 2) {
+            cout << "You and I both know that you know how to play. Let's run it back and try again\n";
+        } else if (currentChoice == 1) {
+            chosenDirection = "left";
+        } else if (currentChoice == 2) {
+            chosenDirection = "right";
+        }
+    }
+    if (goodDirection) {
+        cout << "It looks like the " << chosenDirection << " path was the correct choice here. Thank goodness!";
+    }
+
+
+
+    currentChoice = 0;
+
+    cout << endl << endl;
     // need setup for two more scenarios, going to find the voice and just running away. Three seperate paths, left/right/center. Set it so correct sequence
     // to leave is randomized. If running away, do three times. If finding voice, only choose twice. If found voice then only one choice to get out (always
     // correct, no matter the choice). If no found voice then two to get back, higher chance of correct choices getting out (as opposed to not going)
